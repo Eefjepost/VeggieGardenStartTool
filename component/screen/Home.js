@@ -9,8 +9,7 @@ import {
   Image, 
   Button, 
   Alert, 
-  FlatList,
-  Keyboard
+  FlatList
 } from "react-native";
 import SearchBar from "../shared/SearchBar";
 
@@ -18,6 +17,8 @@ const Home = () => {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
   const [fakeData, setFakeData] = useState();
+  
+  
   
 
   // get data from the fake api
@@ -67,21 +68,17 @@ const renderItem = ({ item }) => {
  
 };
 
-   
+
  
   return (
-    <SafeAreaView style={styles.root} contentContainerStyle={{ flexGrow: 1 }} onStartShouldSetResponder={() => {
-      setClicked(false);
-      Keyboard.dismiss;
-    }}>
+    <SafeAreaView style={styles.root} contentContainerStyle={{ flexGrow: 1 }} >
       
-    
       <SearchBar
-      searchPhrase={searchPhrase}
-      setSearchPhrase={setSearchPhrase}
-      clicked={clicked}
-      setClicked={setClicked}
-      /> 
+    searchPhrase={searchPhrase}
+    setSearchPhrase={setSearchPhrase}
+    clicked={clicked}
+    setClicked={setClicked}
+    /> 
 
       <FlatList
     data={clicked ? fakeData: []}

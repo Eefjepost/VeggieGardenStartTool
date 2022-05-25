@@ -6,7 +6,7 @@ const App = () => {
   
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} >
       <Home />
       </SafeAreaView>
   );
