@@ -9,9 +9,12 @@ import {
   Image, 
   Button, 
   Alert, 
-  FlatList
+  FlatList,
+  KeyboardAvoidingView
 } from "react-native";
 import SearchBar from "../shared/SearchBar";
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+
 
 const Home = () => {
   const [searchPhrase, setSearchPhrase] = useState("");
@@ -71,15 +74,18 @@ const renderItem = ({ item }) => {
 
  
   return (
-    <SafeAreaView style={styles.root} contentContainerStyle={{ flexGrow: 1 }} >
+    <KeyboardAwareScrollView style={styles.root} contentContainerStyle={{ flexGrow: 1, justifyContent: "center",
+    alignItems: "center"}} >
       
       <SearchBar
     searchPhrase={searchPhrase}
     setSearchPhrase={setSearchPhrase}
     clicked={clicked}
     setClicked={setClicked}
+
     /> 
 
+{clicked === true && (
       <FlatList
     data={clicked ? fakeData: []}
     searchPhrase={searchPhrase}
@@ -87,6 +93,7 @@ const renderItem = ({ item }) => {
     renderItem={renderItem}
     setClicked={clicked}
        />   
+  )}
 
       <Image style={styles.startScreen} source={require('../../assets/startscreen.jpg')}
       />
@@ -108,7 +115,7 @@ const renderItem = ({ item }) => {
       onPress={() => Alert.alert('Button with adjusted color pressed')}
       />
       
-    </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -116,8 +123,6 @@ export default Home;
 
 const styles = StyleSheet.create({
   root: {
-    justifyContent: "center",
-    alignItems: "center",
     flex: 1,
     width: "100%",
 
