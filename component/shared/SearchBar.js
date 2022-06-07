@@ -29,7 +29,7 @@ const handleBlur = () => {
         <Feather
           name="search"
           size={20}
-          color="black"
+          color='black'
           style={{ marginLeft: 1 }}
         />
 
@@ -45,7 +45,6 @@ const handleBlur = () => {
 {clicked &&
   <Entypo name="cross" size={20} style={{ padding: 1 }} color="black" onPress={()=>clear()} /> 
 }
-
      
       </View>
       
@@ -57,20 +56,21 @@ export default SearchBar;
 
 const styles = StyleSheet.create({
   container: {
-    margin: 50,
+    margin: 20,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
     width: "90%",
+
     
   },
   searchBar__unclicked: {
     padding: 10,
     flexDirection: "row",
-    width: "95%",
+    alignSelf: "stretch",
+    width: "80%",
     backgroundColor: "#d9dbda",
-    borderRadius: 15,
-    alignItems: "center",
+    borderRadius: 15
   },
   searchBar__clicked: {
     padding: 10,
@@ -78,8 +78,6 @@ const styles = StyleSheet.create({
     width: "80%",
     backgroundColor: "#d9dbda",
     borderRadius: 15,
-    alignItems: "center",
-    justifyContent: "space-evenly",
   },
   input: {
     fontSize: 20,

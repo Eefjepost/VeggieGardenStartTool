@@ -4,96 +4,38 @@ import AppLoading from 'expo-app-loading';
 import {
   StyleSheet,
   Text,
-  SafeAreaView,
-  View,
   Image, 
   Button, 
   Alert, 
-  FlatList,
-  KeyboardAvoidingView
+  View
 } from "react-native";
-import SearchBar from "../shared/SearchBar";
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { Feather} from "@expo/vector-icons";
 
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
   const [fakeData, setFakeData] = useState();
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Feather
+            name="search"
+            size={22}
+            color='#808000'
+            style={{ marginRight: 10 }}
+            onPress={() => navigation.navigate('Search')}
+          />
+      ),
+    });
+  }, [navigation]);
   
   
-  
-
-  // get data from the fake api
-  useEffect(() => {
-   
-
-    const getData = async () => {
-      const apiResponse = await fetch(
-        "https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages"
-      );
-      const fakeData = await apiResponse.json();
-      setFakeData(fakeData);
-    };
-
-    getData();
-  }, []);
-
-  //load fonts
-  let [fontsLoaded] = useFonts({
-    Inter_800ExtraBold, Inter_900Black,
-  });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
-
-  // definition of the Item, which will be rendered in the FlatList
-const Item = ({ name, details }) => ( 
-  <View style={styles.item}>
-    <Text style={styles.title}>{name}</Text>
-    <Text style={styles.details}>{details}</Text>
-  </View>
-
-);
-
-// the filter
-const renderItem = ({ item }) => {
-     
-  // filter of the name
-  if (item.name.toUpperCase().includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
-    return <Item name={item.name} details={item.details} />;
-  }
-  // filter of the description
-  if (item.details.toUpperCase().includes(searchPhrase.toUpperCase().trim().replace(/\s/g, ""))) {
-    return <Item name={item.name} details={item.details} />;
-  }
- 
-};
-
-
- 
   return (
     <KeyboardAwareScrollView style={styles.root} contentContainerStyle={{ flexGrow: 1, justifyContent: "center",
     alignItems: "center"}} >
-      
-      <SearchBar
-    searchPhrase={searchPhrase}
-    setSearchPhrase={setSearchPhrase}
-    clicked={clicked}
-    setClicked={setClicked}
-
-    /> 
-
-{clicked === true && (
-      <FlatList
-    data={clicked ? fakeData: []}
-    searchPhrase={searchPhrase}
-    keyExtractor={(item) => item.id}
-    renderItem={renderItem}
-    setClicked={clicked}
-       />   
-  )}
 
       <Image style={styles.startScreen} source={require('../../assets/startscreen.jpg')}
       />
