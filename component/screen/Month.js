@@ -8,7 +8,7 @@ import {Picker} from '@react-native-picker/picker';
 
 const Month = ({  }) => {
 
-    const [selected, setSelected] = useState("js");
+    const [selected, setSelected] = useState("ja");
       
     
 
@@ -22,18 +22,26 @@ const Month = ({  }) => {
    <View>
       <Text style={styles.text}>When would you like to start?</Text>
       </View>
-      <View>
+      <View style={styles.viewPicker}>
       <Picker
         selectedValue={selected}
         onValueChange={value => setSelected({ selected: value })}
         backgroundColor="white"
         itemStyle={{ color: "red" }}
       >
-        <Picker.Item label="Python" value="py" />
-        <Picker.Item  label="C++" value="c" />
-        <Picker.Item  label="JavaScript" value="js" />
-        <Picker.Item  label="Ruby" value="ru" />
-        <Picker.Item  label="Other" value="etc" />
+        <Picker.Item style={styles.pickerItem} label="January" value="ja" />
+        <Picker.Item style={styles.pickerItem} label="February" value="fe" />
+        <Picker.Item style={styles.pickerItem} label="March" value="ma" />
+        <Picker.Item style={styles.pickerItem} label="April" value="ap" />
+        <Picker.Item style={styles.pickerItem} label="May" value="my" />
+        <Picker.Item style={styles.pickerItem} label="June" value="ju" />
+        <Picker.Item style={styles.pickerItem} label="July" value="jl" />
+        <Picker.Item style={styles.pickerItem} label="August" value="au" />
+        <Picker.Item style={styles.pickerItem} label="September" value="se" />
+        <Picker.Item style={styles.pickerItem} label="October" value="oc" />
+        <Picker.Item style={styles.pickerItem} label="November" value="no" />
+        <Picker.Item style={styles.pickerItem} label="December" value="de" />
+        
       </Picker>
      
       </View>
@@ -63,6 +71,16 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     
   },
+  viewPicker: {
+    flex: 1,
+    paddingTop: 40,
+    width: '80%',
+    margin: 10,
+
+  },
+  pickerItem: {
+    fontSize: 20, margin: 2
+  }
 });
 
 export default Month;
