@@ -7,16 +7,15 @@ import {
   Image, 
   Button, 
   Alert, 
-  View
+  View,
+  TouchableOpacity
 } from "react-native";
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { Feather} from "@expo/vector-icons";
 
 
 const Home = ({ navigation }) => {
-  const [searchPhrase, setSearchPhrase] = useState("");
-  const [clicked, setClicked] = useState(false);
-  const [fakeData, setFakeData] = useState();
+ 
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -39,23 +38,24 @@ const Home = ({ navigation }) => {
 
       <Image style={styles.startScreen} source={require('../../assets/startscreen.jpg')}
       />
-      <Text style={{ fontFamily: 'Inter_800ExtraBold', fontSize: 40, margin: 2}}>What are you looking for?</Text>   
-      
-      <Button
-      title="Choose starting month"
-      style ={styles.button}
-      color = "#808000"
-      onPress={() => Alert.alert('Button with adjusted color pressed')}
-      />
 
-      <Text style={{ fontFamily: 'Inter_900Black,', fontSize: 30 }}>Or: </Text>  
+      <View>
+      <Text style={styles.headerText}>What are you looking for?</Text>  
+      </View>
+
+      <TouchableOpacity style ={styles.buttonStyle}
+      onPress={() => navigation.navigate('Month')}
+      >
+     
+        <Text style={{alignSelf:"center", color: "white"}}>Month to start</Text>
+      </TouchableOpacity> 
+
+      <Text style={styles.text}>Or: </Text>  
       
-      <Button
-      title="choose veggie"
-      style ={styles.button}
-      color= "#808000"
+      <TouchableOpacity style ={styles.buttonStyle}
       onPress={() => Alert.alert('Button with adjusted color pressed')}
-      />
+      ><Text style={{alignSelf:"center", color: "white"}}>Select veggie</Text>
+      </TouchableOpacity> 
       
     </KeyboardAwareScrollView>
   );
@@ -67,15 +67,26 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     width: "100%",
-
+  },
+  headerText: {
+    fontFamily: 'Inter_800ExtraBold', fontSize: 40, margin: 2
+  },
+  text: {
+marginVertical: 50,
   },
   startScreen: {
     width: 300,
     height: 300,
     marginVertical: 19,
   },
-  button: {
-  marginVertical: 20
-  }
+  buttonStyle: {
+  borderRadius: 15,
+  backgroundColor: '#b2bb84',
+  marginVertical: 20,
+  padding: 20,
+  width: '80%'
+ 
+  },
+  
  
 });

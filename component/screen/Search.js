@@ -5,9 +5,11 @@ import {
   Text,
   View,
   FlatList, 
+  TouchableOpacity
 } from "react-native";
 import SearchBar from "../shared/SearchBar";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Entypo} from "@expo/vector-icons";
 
 
 const Search = () => {
@@ -63,17 +65,35 @@ if (item.details.toUpperCase().includes(searchPhrase.toUpperCase().trim().replac
 
 };
 
+const clear = () =>{
+  setSearchPhrase("");
+  }
+
 
 return (
 <View Style={{justifyContent: "flex-start",
     alignItems: "center"}} >
 
-<SearchBar
+<View style={{flexDirection: 'row', width: '90%'}}>
+<View>
+<SearchBar 
     searchPhrase={searchPhrase}
     setSearchPhrase={setSearchPhrase}
     clicked={clicked}
     setClicked={setClicked}
     /> 
+</View>
+
+{clicked &&
+<View style={{alignSelf: 'center', marginLeft: -5}}>
+<TouchableOpacity onPress={clear} >
+  <Entypo name="cross" size={30} style={{ padding: 1 }} color="black" /> 
+  </TouchableOpacity>
+  </View>
+}
+
+</View>
+
         
     <FlatList style={{marginLeft: 20}}
       data={fakeData}

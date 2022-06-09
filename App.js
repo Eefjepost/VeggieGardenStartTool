@@ -1,6 +1,7 @@
 import React from "react";
 import Home from './component/screen/Home';
 import Search from './component/screen/Search';
+import Month from './component/screen/Month';
 import {SafeAreaView, StyleSheet, Keyboard} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,7 +17,10 @@ const App = () => {
       <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} options={{ title: 'Veggie Start Tool', headerTitleStyle: {
             fontWeight: 'bold', color: '#808000'} }} />
-      <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen name="Search" component={Search} options={{ title: 'Veggie Start Tool', headerTitleStyle: {
+            fontWeight: 'bold', color: '#808000'} }} />
+            <Stack.Screen name="Month" component={Month} options={{ title: 'Veggie Start Tool', headerTitleStyle: {
+            fontWeight: 'bold', color: '#808000'} }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

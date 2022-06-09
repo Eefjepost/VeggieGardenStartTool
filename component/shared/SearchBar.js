@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Keyboard, Button} from "react-native";
+import { StyleSheet, TextInput, View, Keyboard, TouchableOpacity} from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 
 
@@ -42,10 +42,6 @@ const handleBlur = () => {
           onBlur={handleBlur}
         />
 
-{clicked &&
-  <Entypo name="cross" size={20} style={{ padding: 1 }} color="black" onPress={()=>clear()} /> 
-}
-     
       </View>
       
     </View>
