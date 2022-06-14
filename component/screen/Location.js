@@ -1,38 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import {Picker} from '@react-native-picker/picker';
-import { database } from "../../firebase-config";
-import {ref, onValue} from 'firebase/database';
 
 
 
-const Month = ({  }) => {
 
-    
-    const [retrievedData, setRetrievedData] = useState([]);
-    const [selected, setSelected] = useState('');
 
-  
+const Location = ({  }) => {
 
-    useEffect(() => { 
-      return onValue(ref(database, '/month'), querySnapShot => {
-        const data = querySnapShot.val() || {};
-        const retrievedData = Object.values(data);
-        setRetrievedData(retrievedData);
-        console.log(retrievedData);
-      });
-    }, []);
+    const [selected, setSelected] = useState("no");
       
-    
-      const Items = retrievedData.map( (s, i) => {
-          return <Picker.Item key={i} value={i} label={s} />
-      });
-      
-      const handleChange = (value) =>{
-        setSelected({selected : value});
-        console.log({selected : value});
-        }
-
     
 
   return(
@@ -49,16 +26,16 @@ const Month = ({  }) => {
       <View style={styles.viewPicker}>
     
       <Picker
-    
-      selectedValue={selected}
-      onValueChange={handleChange}
-      itemStyle={{ color: "red" }}
+        selectedValue={selected}
+        onValueChange={value => setSelected({ selected: value })}
+        backgroundColor="black"
+        itemStyle={{ color: "red" }}
       >
-        {Items}
-
-    
-  
-      
+        <Picker.Item style={styles.pickerItem} label="Northern Hemisphere" value="no" />
+        <Picker.Item style={styles.pickerItem} label="Southern Hemisphere" value="so" />
+     
+        
+        
       </Picker>
      
       </View>
@@ -98,4 +75,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Month;
+export default Location;

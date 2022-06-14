@@ -47,7 +47,7 @@ const Home = ({ navigation }) => {
       onPress={() => navigation.navigate('Month')}
       >
      
-        <Text style={{alignSelf:"center", color: "white"}}>Month to start</Text>
+        <Text style={{alignSelf:"center", color: "white"}}>Select month</Text>
       </TouchableOpacity> 
 
       <Text style={styles.text}>Or: </Text>  
