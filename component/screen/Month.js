@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Image, ScrollView, StyleSheet, Text, View} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity} from "react-native";
 import {Picker} from '@react-native-picker/picker';
 import { database } from "../../firebase-config";
 import {ref, onValue} from 'firebase/database';
 
 
 
-const Month = ({  }) => {
+const Month = ({ navigation  }) => {
 
     
     const [retrievedData, setRetrievedData] = useState([]);
     const [selected, setSelected] = useState('');
-
-  
-
+   
     useEffect(() => { 
       return onValue(ref(database, '/month'), querySnapShot => {
         const data = querySnapShot.val() || {};
@@ -25,17 +23,20 @@ const Month = ({  }) => {
       
     
       const Items = retrievedData.map( (s, i) => {
-          return <Picker.Item key={i} value={i} label={s} />
+          return <Picker.Item key={i} value={s} label={s} />
       });
+
+     
       
-      const handleChange = (value) =>{
-        setSelected({selected : value});
-        console.log({selected : value});
+      const handleChange = (value, index) =>{
+        setSelected(value);
+        console.log(value +': '+index);
         }
 
-    
+        
 
-  return(
+
+  return (
   <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1, justifyContent: "center",
   alignItems: "center"}}>
        <View>
@@ -47,21 +48,20 @@ const Month = ({  }) => {
       </View>
 
       <View style={styles.viewPicker}>
-    
       <Picker
-    
       selectedValue={selected}
       onValueChange={handleChange}
-      itemStyle={{ color: "red" }}
+      itemStyle={{ color: "black" }}
+      placeholder={{ label: "Select your month", value: null }}
       >
         {Items}
-
-    
-  
-      
       </Picker>
-     
       </View>
+      <TouchableOpacity style ={styles.buttonStyle}
+      onPress={() => navigation.navigate('Location')}>
+        <Text style={{alignSelf:"center", color: "white"}}>Next</Text>
+      </TouchableOpacity> 
+
       </ScrollView>
 );
 
@@ -95,7 +95,14 @@ const styles = StyleSheet.create({
   pickerItem: {
     fontSize: 20, margin: 2,
     color: 'black'
-  }
+  },
+  buttonStyle: {
+    borderRadius: 15,
+    backgroundColor: '#b2bb84',
+    marginVertical: 20,
+    padding: 20,
+    width: '80%'
+    },
 });
 
 export default Month;

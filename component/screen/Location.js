@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Image, ScrollView, StyleSheet, Text, View} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity} from "react-native";
 import {Picker} from '@react-native-picker/picker';
-
-
-
-
 
 const Location = ({  }) => {
 
-    const [selected, setSelected] = useState("no");
-      
-    
+    const [hemisphere, setHemisphere] = useState(" ");
+   
 
   return(
   <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1, justifyContent: "center",
@@ -20,25 +15,27 @@ const Location = ({  }) => {
       />
       </View>
         <View>
-      <Text style={styles.text}>When would you like to start?</Text>
+      <Text style={styles.text}>Where are you located?</Text>
       </View>
 
       <View style={styles.viewPicker}>
     
       <Picker
-        selectedValue={selected}
-        onValueChange={value => setSelected({ selected: value })}
-        backgroundColor="black"
-        itemStyle={{ color: "red" }}
+        selectedValue={hemisphere}
+        onValueChange={label => setHemisphere({ hemisphere: label})}
+        itemStyle={{ color: "black" }}
       >
         <Picker.Item style={styles.pickerItem} label="Northern Hemisphere" value="no" />
         <Picker.Item style={styles.pickerItem} label="Southern Hemisphere" value="so" />
-     
-        
-        
       </Picker>
      
       </View>
+
+      <TouchableOpacity style ={styles.buttonStyle}
+      onPress={() => navigation.navigate('')}>
+        <Text style={{alignSelf:"center", color: "white"}}>Next</Text>
+      </TouchableOpacity> 
+
       </ScrollView>
 );
 
