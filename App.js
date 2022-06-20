@@ -3,6 +3,7 @@ import Home from './component/screen/Home';
 import Search from './component/screen/Search';
 import Month from './component/screen/Month';
 import Location from './component/screen/Location';
+import Result from './component/screen/Result';
 import {StyleSheet} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -26,6 +27,8 @@ const App = () => {
       <Stack.Screen name="Month" component={Month} options={{ title: 'Veggie Start Tool', headerTitleStyle: {
             fontWeight: 'bold', color: '#808000'} }} />
        <Stack.Screen name="Location" component={Location} options={{ title: 'Veggie Start Tool', headerTitleStyle: {
+            fontWeight: 'bold', color: '#808000'} }} />
+             <Stack.Screen name="Result" component={Result} options={{ title: 'Veggie Start Tool', headerTitleStyle: {
             fontWeight: 'bold', color: '#808000'} }} />
       </Stack.Navigator>
     </NavigationContainer>

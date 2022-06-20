@@ -3,23 +3,29 @@ import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity} from "reac
 import {Picker} from '@react-native-picker/picker';
 import { database } from "../../firebase-config";
 import {ref, onValue} from 'firebase/database';
+import { setGlobalState, useGlobalState } from '../shared/Storage'
 
 
 
 const Month = ({ navigation  }) => {
 
-    
+
     const [retrievedData, setRetrievedData] = useState([]);
-    const [selected, setSelected] = useState('');
+    const [selected, setSelected] = useGlobalState('selected');
+  
+    
    
     useEffect(() => { 
-      return onValue(ref(database, '/month'), querySnapShot => {
+      return onValue(ref(database, '/month/month'), querySnapShot => {
         const data = querySnapShot.val() || {};
         const retrievedData = Object.values(data);
         setRetrievedData(retrievedData);
         console.log(retrievedData);
+        setSelected(JSON.stringify(retrievedData[0]));
       });
     }, []);
+
+
       
     
       const Items = retrievedData.map( (s, i) => {
@@ -33,6 +39,12 @@ const Month = ({ navigation  }) => {
         console.log(value +': '+index);
         }
 
+
+      
+        const handleNext = () =>{
+          console.log(selected);
+          navigation.navigate('Location');
+        }
         
 
 
@@ -58,7 +70,7 @@ const Month = ({ navigation  }) => {
       </Picker>
       </View>
       <TouchableOpacity style ={styles.buttonStyle}
-      onPress={() => navigation.navigate('Location')}>
+      onPress={() => handleNext()}>
         <Text style={{alignSelf:"center", color: "white"}}>Next</Text>
       </TouchableOpacity> 
 

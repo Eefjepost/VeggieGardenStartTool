@@ -1,0 +1,173 @@
+{
+  "NH": {
+    "April": {
+        "Sow direct":  {
+      "bub": "Bush Beans",
+      "ch": "Chard",
+      "co": "Colored Onions",
+      "cu": "Cucumbers",
+      "eg": "Eggplant",
+      "fe": "Fennel",
+      "rb": "Red Beet",
+      "sb": "Snap Beans",
+      "sm": "Summer Lettuce",
+      "st": "Spring Turnips",
+      "zu": "Zucchini"
+      },
+        "Sow Indoors": {
+            "test": "Zucchini"
+        },
+        "Harvest": {
+            "test": "Zucchini"
+            
+        }
+    },
+    "August": {
+        "Sow direct": {
+      "fl": "Fall Lettuce",
+      "ft": "Fall Turnips",
+      "sp": "Spinach",
+      "wl": "Winter Lettuce",
+      "wo": "White Onions"
+        },
+          "Sow Indoors": {
+              "test": "Zucchini"
+          },
+          "Harvest": {
+              "test": "Zucchini"
+          }
+    },
+    "February": {
+        "Sow direct": {
+      "bb": "Broad Beans",
+      "co": "Colored Onions"
+        },
+          "Sow Indoors": {
+              "test": "Zucchini"
+          },
+          "Harvest": {
+              "test": "Zucchini"
+          }
+    },
+    "July": {
+        "Sow direct": {
+      "bub": "Bush Beans",
+      "ca": "Carrot",
+      "fe": "Fennel",
+      "fl": "Fall Lettuce",
+      "fpb": "Fresh Pea Beans",
+      "ft": "Fall Turnips",
+      "rb": "Red Beet",
+      "sb": "Snap Beans",
+      "sp": "Spinach"
+        },
+          "Sow Indoors": {
+              "test": "Zucchini"
+          },
+          "Harvest": {
+              "test": "Zucchini"
+          }
+    },
+    "June": {
+        "Sow direct": {
+      "bub": "Bush Beans",
+      "ca": "Carrot",
+      "ch": "Chard",
+      "cu": "Cucumbers",
+      "fe": "Fennel",
+      "fpb": "Fresh Pea Beans",
+      "rb": "Red Beet",
+      "sb": "Snap Beans",
+      "sm": "Summer Lettuce",
+      "zu": "Zucchini"
+        },
+          "Sow Indoors": {
+              "test": "Zucchini"
+          },
+          "Harvest": {
+              "test": "Zucchini"
+          }
+    },
+    "March": {
+        "Sow direct": {
+      "bb": "Broad Beans",
+      "ca": "Carrot",
+      "co": "Colored Onions ",
+      "ra": "Radish",
+      "rb": "Red Beetr",
+      "st": "Spring Turnips"
+        },
+          "Sow Indoors": {
+              "test": "Zucchini"
+          },
+          "Harvest": {
+              "test": "Zucchini"
+          }
+    },
+    "May": {
+        "Sow direct": {
+      "bb": "Broad Beans",
+      "bu": "Bush Beans",
+      "ca": "Carrot",
+      "ce": "Celery (knob)",
+      "ch": "Chard",
+      "cu": "Cucumbers",
+      "eg": "Eggplant",
+      "fe": "Fennel",
+      "fpb": "Fresh Pea Beans",
+      "me": "Melon",
+      "rb": "Red Beet",
+      "sm": "Summer Lettuce",
+      "snb": "Snap Beans",
+      "sp": "Spring Turnips",
+      "zu": "Zucchini"
+        },
+          "Sow Indoors": {
+              "test": "Zucchini"
+          },
+          "Harvest": {
+              "test": "Zucchini"
+          }
+    },
+    "October": {
+        "Sow direct": {
+      "sp": "Spinach",
+      "wl": "Winter Lettuce"
+        },
+          "Sow Indoors": {
+              "test": "Zucchini"
+          },
+          "Harvest": {
+              "test": "Zucchini"
+          }
+    },
+    "September": {
+        "Sow direct": {
+      "ft": "Fall Turnips",
+      "sp": "Spinach",
+      "wl": "Winter Lettuce",
+      "wo": "White Onions"
+        },
+          "Sow Indoors": {
+              "test": "Zucchini"
+          },
+          "Harvest": {
+              "test": "Zucchini"
+          }
+    }
+  },
+  "month": {
+      "ap": "April",
+      "au": "August",
+      "de": "December",
+      "fe": "February",
+      "ja": "January",
+      "jl": "July",
+      "ju": "June",
+      "ma": "March",
+      "my": "May",
+      "no": "November",
+      "oc": "October",
+      "se": "September"
+    }
+}

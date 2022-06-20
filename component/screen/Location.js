@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity} from "react-native";
 import {Picker} from '@react-native-picker/picker';
+import { useGlobalState, setGlobalState } from '../shared/Storage'
 
-const Location = ({  }) => {
+const Location = ({ navigation }) => {
 
-    const [hemisphere, setHemisphere] = useState(" ");
+    const [hemisphere, setHemisphere] = useGlobalState('location');
+
+    const handleChange = (value) =>{
+      setHemisphere(value);
+      console.log(value);
+      }
    
+    const handleButton = () =>{
+      console.log(hemisphere);
+      navigation.navigate('Result');
+      }
+
+
+
 
   return(
   <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1, justifyContent: "center",
@@ -22,17 +35,17 @@ const Location = ({  }) => {
     
       <Picker
         selectedValue={hemisphere}
-        onValueChange={label => setHemisphere({ hemisphere: label})}
+        onValueChange={handleChange}
         itemStyle={{ color: "black" }}
       >
-        <Picker.Item style={styles.pickerItem} label="Northern Hemisphere" value="no" />
-        <Picker.Item style={styles.pickerItem} label="Southern Hemisphere" value="so" />
+        <Picker.Item style={styles.pickerItem} label="Northern Hemisphere" value="Northern Hemisphere" />
+        <Picker.Item style={styles.pickerItem} label="Southern Hemisphere" value="Southern Hemisphere" />
       </Picker>
      
       </View>
 
       <TouchableOpacity style ={styles.buttonStyle}
-      onPress={() => navigation.navigate('')}>
+      onPress={() => handleButton()}>
         <Text style={{alignSelf:"center", color: "white"}}>Next</Text>
       </TouchableOpacity> 
 
@@ -69,7 +82,14 @@ const styles = StyleSheet.create({
   pickerItem: {
     fontSize: 20, margin: 2,
     color: 'black'
-  }
+  },
+  buttonStyle: {
+    borderRadius: 15,
+    backgroundColor: '#b2bb84',
+    marginVertical: 20,
+    padding: 20,
+    width: '80%'
+    }
 });
 
 export default Location;
