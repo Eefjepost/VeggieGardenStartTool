@@ -11,16 +11,19 @@ import {
 } from "react-native";
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { Feather} from "@expo/vector-icons";
-import { useGlobalState } from '../shared/Storage'
+import { useGlobalState } from '../shared/Storage';
+import { database } from "../../firebase-config";
+import {ref, onValue} from 'firebase/database';
 
 
 const Result = ({ navigation }) => {
 
-  const selectedMonth =  useGlobalState('selected'); 
-  const selectedLocation =  useGlobalState('location'); 
+  const [selectedMonth] =  useGlobalState('selected'); 
+  const [selectedLocation] =  useGlobalState('location'); 
+  const [retrievedData, setRetrievedData] = useState([]);
   console.log(selectedMonth);
   console.log(selectedLocation);
-  
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -34,6 +37,26 @@ const Result = ({ navigation }) => {
       ),
     });
   }, [navigation]);
+
+  // get data from database
+  useEffect(() => { 
+
+
+    //Check location and Month for fetching the right table from database
+    if(selectedLocation === 'Northern Hemisphere'){
+      if(selectedMonth === 'March'){
+        return onValue(ref(database, '/VeggieTool/NH/March'), querySnapShot => {
+        const data = querySnapShot.val() || {};
+        const retrievedData = Object.values(data);
+        setRetrievedData(retrievedData);
+        console.log(retrievedData); 
+       });
+      } 
+    } console.log(' no match');
+  
+  }, []);
+
+
 
   
 
@@ -62,7 +85,7 @@ const Result = ({ navigation }) => {
     alignItems: "center"}} >
 
     <View>
-      <Text>What to sow in</Text>
+      <Text style={styles.headerText}>What to sow in {selectedMonth}</Text>
       <TouchableOpacity style ={styles.buttonStyle}>  
         <Text style={{alignSelf:"center", color: "white"}}>Veggie 1</Text>
       </TouchableOpacity> 

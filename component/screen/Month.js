@@ -16,7 +16,7 @@ const Month = ({ navigation  }) => {
     
    
     useEffect(() => { 
-      return onValue(ref(database, '/month/month'), querySnapShot => {
+      return onValue(ref(database, '/VeggieTool/Month'), querySnapShot => {
         const data = querySnapShot.val() || {};
         const retrievedData = Object.values(data);
         setRetrievedData(retrievedData);
