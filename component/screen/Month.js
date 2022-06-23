@@ -3,7 +3,7 @@ import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity} from "reac
 import {Picker} from '@react-native-picker/picker';
 import { database } from "../../firebase-config";
 import {ref, onValue} from 'firebase/database';
-import { setGlobalState, useGlobalState } from '../shared/Storage'
+import { useGlobalState } from '../shared/Storage'
 
 
 
@@ -43,7 +43,7 @@ const Month = ({ navigation  }) => {
       
         const handleNext = () =>{
           console.log(selected);
-          navigation.navigate('Location');
+          navigation.navigate('Geolocation');
         }
         
 

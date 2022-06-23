@@ -2,7 +2,7 @@ import React from "react";
 import Home from './component/screen/Home';
 import Search from './component/screen/Search';
 import Month from './component/screen/Month';
-import Location from './component/screen/Location';
+import Geolocation from './component/screen/Geolocation';
 import Result from './component/screen/Result';
 import {StyleSheet} from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
@@ -26,7 +26,7 @@ const App = () => {
             fontWeight: 'bold', color: '#808000'} }} />
       <Stack.Screen name="Month" component={Month} options={{ title: 'Veggie Start Tool', headerTitleStyle: {
             fontWeight: 'bold', color: '#808000'} }} />
-       <Stack.Screen name="Location" component={Location} options={{ title: 'Veggie Start Tool', headerTitleStyle: {
+       <Stack.Screen name="Geolocation" component={Geolocation} options={{ title: 'Veggie Start Tool', headerTitleStyle: {
             fontWeight: 'bold', color: '#808000'} }} />
              <Stack.Screen name="Result" component={Result} options={{ title: 'Veggie Start Tool', headerTitleStyle: {
             fontWeight: 'bold', color: '#808000'} }} />

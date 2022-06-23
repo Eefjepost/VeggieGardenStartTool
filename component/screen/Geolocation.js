@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity} from "react-native";
 import {Picker} from '@react-native-picker/picker';
-import { useGlobalState, setGlobalState } from '../shared/Storage'
+import { useGlobalState} from '../shared/Storage'
 
-const Location = ({ navigation }) => {
+const Geolocation = ({ navigation }) => {
 
-    const [hemisphere, setHemisphere] = useGlobalState('location');
+    const [hemisphere, setHemisphere] = useGlobalState('geolocation');
 
     const handleChange = (value) =>{
       setHemisphere(value);
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Location;
+export default Geolocation;
