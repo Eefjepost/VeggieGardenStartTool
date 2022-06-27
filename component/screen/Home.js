@@ -6,7 +6,7 @@ import {
   Button, 
   Alert, 
   View,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { Feather} from "@expo/vector-icons";
@@ -40,7 +40,7 @@ const Home = ({ navigation }) => {
       <Image style={styles.startScreen} source={require('../../assets/startscreen.jpg')}
       />
 
-      <View style={{marginVertical: 20}}>
+      <View style={{marginVertical: 30}}>
       <Text style={styles.headerText}>What are you looking for?</Text>  
       </View>
 
@@ -51,20 +51,29 @@ const Home = ({ navigation }) => {
         <Image style={styles.iconImage} source={require('../../assets/calenderIcon3.png')}
       />
       <View style={{flexDirection: "column", alignSelf: 'flex-end', alignContent: 'center', flexwrap: 'wrap', flexShrink: 1}}>
-      <Text style={styles.buttonContentHeader}> Select month</Text>
-      <Text style={styles.buttonContentText}> Choose your preferred month and what you can start with right now. Or what other activities are on the agenda based on your geographical location.  </Text>
+      <Text style={styles.buttonContentHeader}> Month</Text>
+      <Text style={styles.buttonContentText}> See what you can start right now by chosing a month and location.  </Text>
+      <View style={{borderRadius: 15,
+  backgroundColor: '#b2bb84', alignSelf: 'flex-end', borderColor: '#808000', borderWidth: 1,  marginVertical: 10, marginHorizontal: 15, overflow: 'hidden' }}
+      onPress={() => navigation.navigate('Month')}
+      ><Text style={{color:'#808000', marginVertical: 10, marginHorizontal: 30}}>Start</Text>
+      </View>
       </View>
       </TouchableOpacity> 
-      
+    
       <TouchableOpacity style ={styles.buttonStyle}
       onPress={() => navigation.navigate('Month')}
       >
         <Image style={styles.iconImage} source={require('../../assets/veggieIcon3.png')}
       />
       <View style={{flexDirection: "column", alignSelf: 'center', alignContent: 'center', flexwrap: 'wrap', flexShrink: 1}}>
-      <Text style={styles.buttonContentHeader}> Select Veggie</Text>
+      <Text style={styles.buttonContentHeader}> Veggie</Text>
       <Text style={styles.buttonContentText}> Choose a veggie to see when to sow, harvest and other relevant information. </Text>
-      <Text style={{marginVertical: 15}}></Text>
+      <View style={{borderRadius: 15,
+  backgroundColor: '#b2bb84', alignSelf: 'flex-end', borderColor: '#808000', borderWidth: 1,  marginVertical: 10, marginHorizontal: 15, overflow: 'hidden' }}
+      onPress={() => navigation.navigate('Month')}
+      ><Text style={{color:'#808000', marginVertical: 10, marginHorizontal: 30}}>Start</Text>
+      </View>
       </View>
       </TouchableOpacity> 
       
@@ -80,10 +89,12 @@ const styles = StyleSheet.create({
     width: "100%",
   },
     headerText: {
-      color:'black',
-      fontSize: 42,
+      color:'#808000',
+      fontSize: 40,
       fontWeight: "bold",
       textAlign: "center",
+      alignSelf:'center',
+      width: '80%',
   },
   text: {
   marginVertical: 50,
@@ -91,7 +102,7 @@ const styles = StyleSheet.create({
   startScreen: {
     width: 300,
     height: 300,
-    marginVertical: 19,
+    marginTop: 19,
     alignSelf:'center',
     borderRadius: 15,
     shadowOffset: {width: 1, height: 4},
@@ -122,6 +133,7 @@ const styles = StyleSheet.create({
   marginVertical: 10,
   marginHorizontal: 10,
   flexDirection: "row",
+  alignSelf: 'center'
   },
   buttonContentHeader: {
     marginHorizontal: 18,
@@ -133,7 +145,7 @@ const styles = StyleSheet.create({
   },
   buttonContentText: {
     marginHorizontal: 18,
-    marginBottom: 20,
+    marginBottom: 5,
     marginTop: 20,
     color: 'white',
     alignSelf: "center",
