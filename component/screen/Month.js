@@ -52,7 +52,7 @@ const Month = ({ navigation  }) => {
   <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1, justifyContent: "center",
   alignItems: "center"}}>
        <View>
-      <Image style={styles.calendar} source={require('../../assets/calendar.jpg')}
+      <Image style={styles.calendar} source={require('../../assets/calenderIcon.jpg')}
       />
       </View>
         <View>

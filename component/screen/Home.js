@@ -40,7 +40,7 @@ const Home = ({ navigation }) => {
       <Image style={styles.startScreen} source={require('../../assets/startscreen.jpg')}
       />
 
-      <View style={{marginBottom: 20}}>
+      <View style={{marginVertical: 20}}>
       <Text style={styles.headerText}>What are you looking for?</Text>  
       </View>
 
@@ -48,17 +48,24 @@ const Home = ({ navigation }) => {
       <TouchableOpacity style ={styles.buttonStyle}
       onPress={() => navigation.navigate('Month')}
       >
+        <Image style={styles.iconImage} source={require('../../assets/calenderIcon3.png')}
+      />
+      <View style={{flexDirection: "column", alignSelf: 'flex-end', alignContent: 'center', flexwrap: 'wrap', flexShrink: 1}}>
       <Text style={styles.buttonContentHeader}> Select month</Text>
       <Text style={styles.buttonContentText}> Choose your preferred month and what you can start with right now. Or what other activities are on the agenda based on your geographical location.  </Text>
-
+      </View>
       </TouchableOpacity> 
       
-
-      <Text style={styles.text}>Or: </Text>  
-      
       <TouchableOpacity style ={styles.buttonStyle}
-      onPress={() => Alert.alert('Button with adjusted color pressed')}
-      ><Text style={{alignSelf:"center", color: "white"}}>Select veggie</Text>
+      onPress={() => navigation.navigate('Month')}
+      >
+        <Image style={styles.iconImage} source={require('../../assets/veggieIcon3.png')}
+      />
+      <View style={{flexDirection: "column", alignSelf: 'center', alignContent: 'center', flexwrap: 'wrap', flexShrink: 1}}>
+      <Text style={styles.buttonContentHeader}> Select Veggie</Text>
+      <Text style={styles.buttonContentText}> Choose a veggie to see when to sow, harvest and other relevant information. </Text>
+      <Text style={{marginVertical: 15}}></Text>
+      </View>
       </TouchableOpacity> 
       
     </View>
@@ -85,17 +92,36 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     marginVertical: 19,
+    alignSelf:'center',
+    borderRadius: 15,
+    shadowOffset: {width: 1, height: 4},
+    shadowColor: 'black',
+    shadowOpacity: 0.32,
+    shadowRadius: 5
+  },
+  iconImage: {
+    width: 100,
+    height: 150,
+    marginVertical: 5,
+    marginHorizontal: 10,
+    borderRadius: 15,
+    shadowOffset: {width: 1, height: 2},
+    shadowColor: '#333',
+    shadowOpacity: 0.3,
+    shadowRadius: 8
   },
   buttonStyle: {
   borderRadius: 15,
   backgroundColor: '#b2bb84',
   elevation: 3,
-  shadowOffset: {widt: 1, height: 1},
+  shadowOffset: {width: 1, height: 1},
   shadowColor: '#333',
   shadowOpacity: 0.3,
   shadowRadius: 5,
-  width: '80%',
-  marginVertical: 20
+  width: '90%',
+  marginVertical: 10,
+  marginHorizontal: 10,
+  flexDirection: "row",
   },
   buttonContentHeader: {
     marginHorizontal: 18,
@@ -103,12 +129,15 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: "bold",
+    alignSelf: "flex-start",
   },
   buttonContentText: {
     marginHorizontal: 18,
-    marginBottom: 50,
+    marginBottom: 20,
     marginTop: 20,
     color: 'white',
+    alignSelf: "center",
+    
   }
 });
 
