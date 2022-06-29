@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity} from "react-native";
-import {Picker} from '@react-native-picker/picker';
+import RNPickerSelect from 'react-native-picker-select';
 import { database } from "../../firebase-config";
 import {ref, onValue} from 'firebase/database';
 import { useGlobalState } from '../shared/Storage'
@@ -12,27 +12,33 @@ const Month = ({ navigation  }) => {
 
     const [retrievedData, setRetrievedData] = useState([]);
     const [selected, setSelected] = useGlobalState('selected');
-  
+    const [data, setData] = useState([]);  
     
    
     useEffect(() => { 
       return onValue(ref(database, '/VeggieTool/Month'), querySnapShot => {
         const data = querySnapShot.val() || {};
+        setData(data);
+        console.log(data);
+        //from object to array
         const retrievedData = Object.values(data);
         setRetrievedData(retrievedData);
-        console.log(retrievedData);
-        setSelected(JSON.stringify(retrievedData[0]));
+        console.log(data);
       });
     }, []);
 
 
       
     
-      const Items = retrievedData.map( (s, i) => {
-          return <Picker.Item key={i} value={s} label={s} />
-      });
+      const Items = retrievedData.map( (s, i) => 
+          ({key: i, value: s,  label: s })
+      );
+
+    
 
      
+     
+  
       
       const handleChange = (value, index) =>{
         setSelected(value);
@@ -60,14 +66,13 @@ const Month = ({ navigation  }) => {
       </View>
 
       <View style={styles.viewPicker}>
-      <Picker
-      selectedValue={selected}
+      <RNPickerSelect
       onValueChange={handleChange}
       itemStyle={{ color: "black" }}
-      placeholder={{ label: "Select your month", value: null }}
-      >
-        {Items}
-      </Picker>
+      placeholder={{ label: "Select your month", value: ''}}
+      items={Items}
+     />
+      
       </View>
       <TouchableOpacity style ={styles.buttonStyle}
       onPress={() => handleNext()}>
