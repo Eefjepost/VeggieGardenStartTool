@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity} from "react-native";
-import {Picker} from '@react-native-picker/picker';
+import RNPickerSelect from 'react-native-picker-select';
 import { useGlobalState} from '../shared/Storage'
 
 const Geolocation = ({ navigation }) => {
@@ -31,24 +31,28 @@ const Geolocation = ({ navigation }) => {
       <Text style={styles.text}>Where are you located?</Text>
       </View>
 
-      <View style={styles.viewPicker}>
+      <View style={styles.containerPicker}>
     
-      <Picker
-        selectedValue={hemisphere}
+      <RNPickerSelect
         onValueChange={handleChange}
-        itemStyle={{ color: "black" }}
-      >
-        <Picker.Item style={styles.pickerItem} label="Northern Hemisphere" value="Northern Hemisphere" />
-        <Picker.Item style={styles.pickerItem} label="Southern Hemisphere" value="Southern Hemisphere" />
-      </Picker>
+        useNativeAndroidPickerStyle={false}
+        placeholder={{ label: "Select your location", value: ''}}
+        items={[
+          { label: 'Northern Hemisphere', value: 'Northern Hemisphere' },
+          { label: 'Southern Hemisphere', value: 'Southern Hemisphere' }
+        ]}
+        style={styles}
+      />
      
       </View>
 
+    {hemisphere == '' ? ( null ) : (
       <TouchableOpacity style ={styles.buttonStyle}
       onPress={() => handleButton()}>
         <Text style={{alignSelf:"center", color: "white"}}>Next</Text>
       </TouchableOpacity> 
-
+      )
+    }
       </ScrollView>
 );
 
@@ -89,7 +93,33 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     padding: 20,
     width: '80%'
-    }
+    },
+    inputAndroid: {
+      fontSize: 17,
+      paddingHorizontal: 80,
+      paddingVertical: 8,
+      borderWidth: 0.5,
+      borderColor: '#808000',
+      borderRadius: 8,
+      color: '#808000'
+    },
+    inputIOS: {
+      fontSize: 17,
+      paddingVertical: 12,
+      paddingHorizontal: 80,
+      borderWidth: 1,
+      borderColor: '#808000',
+      borderRadius: 4,
+      color: '#808000',
+    },
+    placeholder: {
+      color: '#808000',
+    },
+    containerPicker : {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+  }
 });
 
 export default Geolocation;

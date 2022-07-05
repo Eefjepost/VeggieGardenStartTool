@@ -27,6 +27,7 @@ useEffect(() => {
     );
     const fakeData = await apiResponse.json();
     setFakeData(fakeData);
+    console.log(fakeData);
   };
 
   getData();

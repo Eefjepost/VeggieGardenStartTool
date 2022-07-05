@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useFonts, Inter_800ExtraBold, Inter_900Black} from '@expo-google-fonts/inter';
-import AppLoading from 'expo-app-loading';
 import {
   StyleSheet,
   Text,
   Image, 
   Alert, 
   View,
-  TouchableOpacity
+  TouchableOpacity, 
+  FlatList
 } from "react-native";
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import { Feather} from "@expo/vector-icons";
 import { useGlobalState } from '../shared/Storage';
 import { database } from "../../firebase-config";
 import {ref, onValue} from 'firebase/database';
 import Card from "../shared/Card";
+import { Inter_500Medium } from "@expo-google-fonts/inter";
 
 
 const Result = ({ navigation }) => {
@@ -22,59 +21,59 @@ const Result = ({ navigation }) => {
   const [selectedMonth] =  useGlobalState('selected'); 
   const [selectedGeolocation] =  useGlobalState('geolocation'); 
   const [retrievedData, setRetrievedData] = useState([]);
-  console.log(selectedMonth);
-  console.log(selectedGeolocation);
-
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <Feather
-            name="search"
-            size={22}
-            color='#808000'
-            style={{ marginRight: 10 }}
-            onPress={() => navigation.navigate('Search')}
-          />
-      ),
-    });
-  }, [navigation]);
+  
 
   // get data from database
   useEffect(() => { 
-
-
+  return onValue(ref(database, '/VeggieTool/'+selectedGeolocation), snapShot => {
     //Check location and Month for fetching the right table from database
-    if(selectedGeolocation === 'Northern Hemisphere'){
-      if(selectedMonth === 'March'){
-        return onValue(ref(database, '/VeggieTool/NH/March'), querySnapShot => {
-        const data = querySnapShot.val() || {};
-        const retrievedData = Object.values(data);
+        const data = snapShot.val() || {};
+        console.log(data);
+
+        //from object of objects to array of objects
+        const retrievedData =data[selectedMonth]  //Object.values(data);
         setRetrievedData(retrievedData);
-        console.log(retrievedData); 
-       });
-      } 
-    } console.log(' no match');
+        console.log(retrievedData);
+      
+  });
+}, []);
+
+
+  // // console.log(itemsData);
+
+
+  // const renderItem = ({item}) => 
+  // <Item value={item.key} />;
   
-  }, []);
+  // const Items = retrievedData.map( ( {SowDirect}, index ) => {
+  //   return (<Text key={index}>{JSON.stringify(SowDirect)}</Text>);
+  // });
+
+  //     console.log(Items);
 
 
   return (
-    <KeyboardAwareScrollView style={styles.root} contentContainerStyle={{ flexGrow: 1, justifyContent: "center",
+    <View style={styles.root} contentContainerStyle={{ flexGrow: 1, justifyContent: "center",
     alignItems: "center"}} >
 
     <View>
-      
       <Image style={styles.result} source={require('../../assets/resultscreen.jpg')}
       />
     <Text style={styles.headerText}>What to sow in {selectedMonth}</Text>
+
+    {/* <FlatList
+  data={retrievedSow}
+  keyExtractor={item => item.id}
+  renderItem={renderItem}
+ /> */}
+
+     
     <TouchableOpacity>  
         <Card>
-        <Text>Carrot</Text>
-      </Card>
-      </TouchableOpacity> 
+         <Text>Carrot</Text>
+       </Card>
+       </TouchableOpacity>  
       
-    
-
       <TouchableOpacity style ={styles.buttonStyle}>  
         <Text style={{alignSelf:"center", color: "white"}}>Veggie 1</Text>
       </TouchableOpacity> 
@@ -117,9 +116,9 @@ const Result = ({ navigation }) => {
       ><Text style={styles.text}>Select veggie</Text>
       </TouchableOpacity> 
       
-    </KeyboardAwareScrollView>
+    </View>
   );
-};
+  };
 
 export default Result;
 

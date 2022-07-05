@@ -74,10 +74,14 @@ const Month = ({ navigation  }) => {
      />
       
       </View>
+
+      {selected == '' ? ( null ) : (
       <TouchableOpacity style ={styles.buttonStyle}
       onPress={() => handleNext()}>
         <Text style={{alignSelf:"center", color: "white"}}>Next</Text>
       </TouchableOpacity> 
+       )
+      }
 
       </ScrollView>
 );
