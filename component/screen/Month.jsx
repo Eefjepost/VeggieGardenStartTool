@@ -1,6 +1,5 @@
-/* eslint-disable global-require */
 /* eslint-disable no-use-before-define */
-/* eslint-disable react/jsx-filename-extension */
+
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import {
@@ -15,6 +14,8 @@ import RNPickerSelect from 'react-native-picker-select';
 import { ref, onValue } from 'firebase/database';
 import { database } from '../../firebase-config';
 import { useGlobalState } from '../shared/Storage';
+
+const MONTH_IMAGE = require('../../assets/calendar.jpg');
 
 function Month({ navigation }) {
   const [retrievedData, setRetrievedData] = useState([]);
@@ -55,9 +56,7 @@ function Month({ navigation }) {
       <View>
         <Image
           style={styles.calendar}
-          source={
-            require('../../assets/calendar.jpg')
-          }
+          source={MONTH_IMAGE}
         />
       </View>
       <View>
