@@ -1,124 +1,135 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
-  Image, 
-  Alert, 
+  Image,
+  Alert,
   View,
-  TouchableOpacity, 
-  FlatList
-} from "react-native";
-import { Feather} from "@expo/vector-icons";
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
+
+import { ref, onValue } from 'firebase/database';
 import { useGlobalState } from '../shared/Storage';
-import { database } from "../../firebase-config";
-import {ref, onValue} from 'firebase/database';
-import Card from "../shared/Card";
-import { Inter_500Medium } from "@expo-google-fonts/inter";
+import { database } from '../../firebase-config';
 
+const Result = () => {
 
-const Result = ({ navigation }) => {
-
-  const [selectedMonth] =  useGlobalState('selected'); 
-  const [selectedGeolocation] =  useGlobalState('geolocation'); 
+  const [selectedMonth] = useGlobalState('selected');
+  const [selectedGeolocation] = useGlobalState('geolocation');
   const [retrievedData, setRetrievedData] = useState([]);
+  const [retrievedSow, setRetrievedSow] = useState([]);
+  const [sowdirect] = useState('SowDirect');
   
 
   // get data from database
-  useEffect(() => { 
-  return onValue(ref(database, '/VeggieTool/'+selectedGeolocation), snapShot => {
-    //Check location and Month for fetching the right table from database
-        const data = snapShot.val() || {};
-        console.log(data);
 
-        //from object of objects to array of objects
-        const retrievedData =data[selectedMonth]  //Object.values(data);
-        setRetrievedData(retrievedData);
-        console.log(retrievedData);
-      
-  });
-}, []);
+  const readData = async () => {
+    // get data from database
+    const reference = ref(database, '/VeggieTool/NH');
+    onValue(reference, (snapShot) => {
+      const data = snapShot.val() || {};
+      console.log(data);
+      // const retrievedMonthData = data[selectedMonth]
+      // setRetrievedData(retrievedMonthData);
+      // console.log(retrievedMonthData);
+      const retrievedSow = Object.values(data[selectedMonth][sowdirect]);
+      setRetrievedSow(retrievedSow);
+      console.log(retrievedSow);
+    });
+
+  };
 
 
-  // // console.log(itemsData);
+  useEffect(() => {
+    readData();
+  }, []);
 
 
-  // const renderItem = ({item}) => 
-  // <Item value={item.key} />;
-  
-  // const Items = retrievedData.map( ( {SowDirect}, index ) => {
-  //   return (<Text key={index}>{JSON.stringify(SowDirect)}</Text>);
-  // });
+  // //array of strings to array of objects
+  const itemsData = retrievedSow.map((index, name) =>
+    ({ key: index, value: name })
+  );
 
-  //     console.log(Items);
 
+  // definition of the Item, which will be rendered in the FlatList
+  const Item = ({ value }) => (
+    <TouchableOpacity style={styles.buttonStyle}>
+      <Text style={{ alignSelf: "center", color: "white" }}> {value}</Text>
+    </TouchableOpacity>
+  );
+
+  // the filter
+  const renderItem = ({ item }) => (
+    <Item value={item.value} />
+  );
 
   return (
-    <View style={styles.root} contentContainerStyle={{ flexGrow: 1, justifyContent: "center",
-    alignItems: "center"}} >
+    <View style={styles.root} contentContainerStyle={{
+      flexGrow: 1, justifyContent: "center",
+      alignItems: "center"
+    }} >
 
-    <View>
-      <Image style={styles.result} source={require('../../assets/resultscreen.jpg')}
-      />
-    <Text style={styles.headerText}>What to sow in {selectedMonth}</Text>
+      <View>
+        <Image style={styles.result} source={require('../../assets/resultscreen.jpg')}
+        />
+        <Text style={styles.headerText}>What to sow in {selectedMonth}</Text>
 
-    {/* <FlatList
-  data={retrievedSow}
-  keyExtractor={item => item.id}
-  renderItem={renderItem}
- /> */}
+        <FlatList
+          data={itemsData}
+          keyExtractor={item => item.key}
+          renderItem={renderItem}
+        />
+        <Item></Item>
 
-     
-    <TouchableOpacity>  
-        <Card>
-         <Text>Carrot</Text>
-       </Card>
-       </TouchableOpacity>  
-      
-      <TouchableOpacity style ={styles.buttonStyle}>  
-        <Text style={{alignSelf:"center", color: "white"}}>Veggie 1</Text>
-      </TouchableOpacity> 
-      
-      <TouchableOpacity style ={styles.buttonStyle}>  
-        <Text style={styles.text}>Veggie 2</Text>
-      </TouchableOpacity> 
-    
-      <TouchableOpacity style ={styles.buttonStyle}>  
-        <Text style={styles.text}>Veggie 3</Text>
-      </TouchableOpacity> 
 
-    </View>
-    <View>
-      <Text>What to Harvest</Text>
-      <TouchableOpacity style ={styles.buttonStyle}>  
-        <Text style={styles.text}>Veggie 1</Text>
-      </TouchableOpacity> 
-      
-      <TouchableOpacity style ={styles.buttonStyle}>  
-        <Text style={styles.text}>Veggie 2</Text>
-      </TouchableOpacity> 
-    
-      <TouchableOpacity style ={styles.buttonStyle}>  
-        <Text style={styles.text}>Veggie 3</Text>
-      </TouchableOpacity> 
+
+        <TouchableOpacity style={styles.buttonStyle}>
+          <Text style={{ alignSelf: "center", color: "white" }}>Veggie 1</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonStyle}>
+          <Text style={styles.text}>Veggie 2</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonStyle}>
+          <Text style={styles.text}>Veggie 3</Text>
+        </TouchableOpacity>
+
+      </View>
+      <View>
+        <Text>What to Harvest</Text>
+        <TouchableOpacity style={styles.buttonStyle}>
+          <Text style={styles.text}>Veggie 1</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonStyle}>
+          <Text style={styles.text}>Veggie 2</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.buttonStyle}>
+          <Text style={styles.text}>Veggie 3</Text>
+        </TouchableOpacity>
       </View>
 
-    <View>
-      <Text>Other activities this month</Text>
-      <TouchableOpacity style={styles.text}>  
-        <Text style={{alignSelf:"center", color: "white"}}>Activity 1</Text>
-      </TouchableOpacity> 
-    </View>
+      <View>
+        <Text>Other activities this month</Text>
+        <TouchableOpacity style={styles.text}>
+          <Text style={{ alignSelf: "center", color: "white" }}>Activity 1</Text>
+        </TouchableOpacity>
+      </View>
 
-      <Text style={styles.text}>Or: </Text>  
-      
-      <TouchableOpacity style ={styles.buttonStyle}
-      onPress={() => Alert.alert('Button with adjusted color pressed')}
+      <Text style={styles.text}>Or: </Text>
+
+      <TouchableOpacity style={styles.buttonStyle}
+        onPress={() => Alert.alert('Button with adjusted color pressed')}
       ><Text style={styles.text}>Select veggie</Text>
-      </TouchableOpacity> 
-      
+      </TouchableOpacity>
+
     </View>
   );
-  };
+};
 
 export default Result;
 
@@ -128,13 +139,13 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   headerText: {
-      color:'black',
-      fontSize: 42,
-      fontWeight: "bold",
-      textAlign: "center",
+    color: 'black',
+    fontSize: 42,
+    fontWeight: "bold",
+    textAlign: "center",
   },
   text: {
-    alignSelf:"center", 
+    alignSelf: "center",
     color: "black"
   },
   startScreen: {
@@ -143,20 +154,20 @@ const styles = StyleSheet.create({
     marginVertical: 19,
   },
   buttonStyle: {
-  borderRadius: 15,
-  backgroundColor: '#b2bb84',
-  marginVertical: 20,
-  padding: 20,
-  width: '80%'
+    borderRadius: 15,
+    backgroundColor: '#b2bb84',
+    marginVertical: 20,
+    padding: 20,
+    width: '80%'
   },
   result: {
     width: 300,
     height: 300,
-    alignSelf:'center',
+    alignSelf: 'center',
     borderRadius: 20,
     marginVertical: 15,
-    
+
   },
-  
- 
+
+
 });
